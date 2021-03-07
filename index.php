@@ -10,6 +10,10 @@
  * @link     https://github.com/chamodyawimansha/SimplePHP
  */
 
- require 'framework/core/Application.php';
+require "Framework/Core/Application.php";
+ 
+ use SimplePHP\Framework\Core\Application;
 
- Application::init();
+ $app = new Application();
+
+ $app->init();
