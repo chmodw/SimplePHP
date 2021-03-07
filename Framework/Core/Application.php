@@ -28,9 +28,13 @@ class Application
      * Implements the constructors
      * and autoloads files.
      */
-    function __construct() 
+    public function __construct() 
     {
 
+        
+
+        // Stating session.
+        session_start();
     }
 
     /**
@@ -40,7 +44,7 @@ class Application
      */
     public function init()
     {
-
+        echo (APP_PATH);
     }
 
     /**
@@ -51,6 +55,14 @@ class Application
     private function _autoload()
     {
 
+    }
+
+    /**
+     * Run when Applicati
+     */
+    public function __destruct()
+    {
+        session_destroy();
     }
 
 }
