@@ -1,0 +1,14 @@
+{
+    "name": "chamodya/Simple-PHP",
+    "description": "A simple php MVC framwork",
+    "type": "project",
+    "authors": [
+        {
+            "name": "chamodya wimansha",
+            "email": "chamodyawimansha@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5"
+    }
+}
