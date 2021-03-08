@@ -10,8 +10,14 @@
  * @link     https://github.com/chamodyawimansha/SimplePHP
  */
 
-return [
+// return [
 
-  "sample" => ROOT,
+//   "sample" => ROOT,
 
-];
+// ];
+
+class Config{
+  public function __construct(){
+    echo("Config");
+  }
+}

@@ -10,7 +10,7 @@
  * @link     https://github.com/chamodyawimansha/SimplePHP
  */
 
-namespace SimplePHP\Framework\Core;
+// namespace SimplePHP\Framework\Core;
 
 /**
  * Application Class - Initiates the application
@@ -30,33 +30,32 @@ class Application
      */
     public function __construct() 
     {
-        /**
-         *  Declaring folder paths
-         */
-        define("DS", DIRECTORY_SEPARATOR);
-        define("ROOT", getcwd(). DS); // Root folder "/var/www/website_folder/"
+        // Defining folder paths
+        define('DS', DIRECTORY_SEPARATOR);
+        define('ROOT', getcwd(). DS); // '/var/www/website_folder/'
 
-        define("APP_FOLDER", ROOT . 'App' . DS);
-        define("FRAMEWORK_FOLDER", ROOT . "Framework" . DS);
-        define("PUBLIC_FOLDER", APP_FOLDER . "public" . DS);
+        define('APP_FOLDER', ROOT . 'App' . DS);
+        define('CONFIG_FOLDER', APP_FOLDER, 'config' . DS);
+        define('FRAMEWORK_FOLDER', ROOT . 'Framework' . DS);
+        define('PUBLIC_FOLDER', APP_FOLDER . 'public' . DS);
 
-        define("CONFIG_FOLDER", APP_FOLDER . "config" . DS);
-        define("CONTROLLER_FOLDER", APP_FOLDER . "controllers" . DS);
-        define("MODEL_FOLDER", APP_FOLDER . "models" . DS);
-        define("VIEW_FOLDER", APP_FOLDER . "views" . DS);
+        define('CONFIG_FOLDER', APP_FOLDER . 'config' . DS);
+        define('CONTROLLER_FOLDER', APP_FOLDER . 'controllers' . DS);
+        define('MODEL_FOLDER', APP_FOLDER . 'models' . DS);
+        define('VIEW_FOLDER', APP_FOLDER . 'views' . DS);
 
-        define("CORE_FOLDER", FRAMEWORK_FOLDER . "core" . DS);
-        define("DATABASE_FOLDER", FRAMEWORK_FOLDER . "database" . DS);
-        define("LIBS_FOLDER", FRAMEWORK_FOLDER . "libraries" . DS);
-        define("HELPERS_FOLDER", FRAMEWORK_FOLDER . "helpers" . DS);
+        define('CORE_FOLDER', FRAMEWORK_FOLDER . 'core' . DS);
+        define('DATABASE_FOLDER', FRAMEWORK_FOLDER . 'database' . DS);
+        define('LIBS_FOLDER', FRAMEWORK_FOLDER . 'libraries' . DS);
+        define('HELPERS_FOLDER', FRAMEWORK_FOLDER . 'helpers' . DS);
 
-
-        
-
-
+        // Autoload classes
+        $this->_autoload();
 
         // Stating session.
         session_start();
+
+        $config = new Config();
     }
 
     /**
