@@ -10,7 +10,7 @@
  * @link     https://github.com/chamodyawimansha/SimplePHP
  */
 
-// namespace SimplePHP\Framework\Core;
+namespace Framework\Core;
 
 /**
  * Application Class - Initiates the application
@@ -35,11 +35,10 @@ class Application
         define('ROOT', getcwd(). DS); // '/var/www/website_folder/'
 
         define('APP_FOLDER', ROOT . 'App' . DS);
-        define('CONFIG_FOLDER', APP_FOLDER, 'config' . DS);
+        define('CONFIG_FOLDER', APP_FOLDER, 'Config' . DS);
         define('FRAMEWORK_FOLDER', ROOT . 'Framework' . DS);
         define('PUBLIC_FOLDER', APP_FOLDER . 'public' . DS);
 
-        define('CONFIG_FOLDER', APP_FOLDER . 'config' . DS);
         define('CONTROLLER_FOLDER', APP_FOLDER . 'controllers' . DS);
         define('MODEL_FOLDER', APP_FOLDER . 'models' . DS);
         define('VIEW_FOLDER', APP_FOLDER . 'views' . DS);
@@ -54,8 +53,6 @@ class Application
 
         // Stating session.
         session_start();
-
-        $config = new Config();
     }
 
     /**
@@ -75,7 +72,11 @@ class Application
      */
     private function _autoload()
     {
-
+        spl_autoload_register(
+            function ($className) {
+                include str_replace('\\', '/', $className) . '.php';
+            }
+        );
     }
 
     /**

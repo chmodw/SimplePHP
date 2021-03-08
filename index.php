@@ -11,9 +11,7 @@
  */
 
 require "Framework/Core/Application.php";
- 
- use SimplePHP\Framework\Core\Application;
 
- $app = new Application();
+ $app = new Framework\Core\Application();
 
  $app->init();
