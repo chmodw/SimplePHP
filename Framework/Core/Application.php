@@ -24,6 +24,11 @@ namespace Framework\Core;
  */
 class Application
 {
+
+    private String $_currentController;
+    private String $_currentAction;
+    private Array $_urlParameters;
+
     /**
      * Implements the constructors
      * and autoload files.
@@ -51,8 +56,34 @@ class Application
         // Autoload classes
         $this->_autoload();
 
+        $this->_init();
+        
+
         // Stating session.
         session_start();
+    }
+
+    /**
+     * Initialize the routes
+     * 
+     * @return Null
+     */
+    private function _init()
+    {   
+        $urlArray = [];
+
+        if (isset($_SERVER['PATH_INFO'])) {
+            $urlString = filter_var($_SERVER['PATH_INFO'],  FILTER_SANITIZE_URL);
+            $urlArray = explode('/', $urlString);
+        }
+    
+        $this->_currentController = isset($urlArray[1]) 
+                                        ? ucfirst(strtolower($urlArray[1])) 
+                                        : "Index";
+        $this->_currentAction = $urlArray[2] ?? "index";
+        $this->_urlParameters = isset($urlArray[3]) 
+                                        ? array_splice($urlArray, 3) 
+                                        : [];
     }
 
     /**
@@ -60,9 +91,9 @@ class Application
      * 
      * @return Null
      */
-    public function init()
-    {
-        echo (FRAMEWORK_FOLDER);
+    public function start()
+    {   
+        echo $this->_currentController;
     }
 
     /**
@@ -80,7 +111,7 @@ class Application
     }
 
     /**
-     * Run when Applicati
+     * Run when Application
      */
     public function __destruct()
     {

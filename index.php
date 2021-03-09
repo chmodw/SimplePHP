@@ -14,4 +14,4 @@ require "Framework/Core/Application.php";
 
  $app = new Framework\Core\Application();
 
- $app->init();
+ $app->start();
