@@ -106,10 +106,12 @@ class Application
                 return $controllerObj->$action($this->_urlParameters);
             }
         }
+        // Send 404 error
+        header(
+            $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404
+        );
 
-        echo "404";
-        exit;
-
+        die();
     }
 
     /**
