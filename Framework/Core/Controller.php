@@ -48,6 +48,31 @@ class Controller
         die("");
     }
 
+    /**
+     * View a Model class
+     * 
+     * @param String $view - name of the View Class
+     * 
+     * @return View
+     */
+    public function view(String $view) 
+    {
+        if (\file_exists(VIEW_FOLDER . $view. ".php")) {
+            
+            $view = "\App\Views\\" . $view;
+            return new $view;
+        }
+
+        // Log the error
+        \error_log($view . " - view Not Found");
+        // send error to the user
+        \header(
+            $_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500
+        );
+        die("");
+    }
+    
+
     // load a view
     // load a library
     // load a helper
