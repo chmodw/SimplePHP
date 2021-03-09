@@ -44,19 +44,19 @@ class Application
         define('FRAMEWORK_FOLDER', ROOT . 'Framework' . DS);
         define('PUBLIC_FOLDER', APP_FOLDER . 'public' . DS);
 
-        define('CONTROLLER_FOLDER', APP_FOLDER . 'controllers' . DS);
-        define('MODEL_FOLDER', APP_FOLDER . 'models' . DS);
-        define('VIEW_FOLDER', APP_FOLDER . 'views' . DS);
+        define('CONTROLLER_FOLDER', APP_FOLDER . 'Controllers' . DS);
+        define('MODEL_FOLDER', APP_FOLDER . 'Models' . DS);
+        define('VIEW_FOLDER', APP_FOLDER . 'Views' . DS);
 
-        define('CORE_FOLDER', FRAMEWORK_FOLDER . 'core' . DS);
-        define('DATABASE_FOLDER', FRAMEWORK_FOLDER . 'database' . DS);
-        define('LIBS_FOLDER', FRAMEWORK_FOLDER . 'libraries' . DS);
-        define('HELPERS_FOLDER', FRAMEWORK_FOLDER . 'helpers' . DS);
+        define('CORE_FOLDER', FRAMEWORK_FOLDER . 'Core' . DS);
+        define('DATABASE_FOLDER', FRAMEWORK_FOLDER . 'Database' . DS);
+        define('LIBS_FOLDER', FRAMEWORK_FOLDER . 'Libraries' . DS);
+        define('HELPERS_FOLDER', FRAMEWORK_FOLDER . 'Helpers' . DS);
 
         // Autoload classes
         $this->_autoload();
 
-        $this->_init();
+        $this->_router();
         
 
         // Stating session.
@@ -68,7 +68,7 @@ class Application
      * 
      * @return Null
      */
-    private function _init()
+    private function _router()
     {   
         $urlArray = [];
 
@@ -79,7 +79,8 @@ class Application
     
         $this->_currentController = isset($urlArray[1]) 
                                         ? ucfirst(strtolower($urlArray[1])) 
-                                        : "Index";
+                                        : "Index"
+                                    ;
         $this->_currentAction = $urlArray[2] ?? "index";
         $this->_urlParameters = isset($urlArray[3]) 
                                         ? array_splice($urlArray, 3) 
@@ -91,9 +92,24 @@ class Application
      * 
      * @return Null
      */
-    public function start()
+    public function init()
     {   
-        echo $this->_currentController;
+        $controller = "\App\Controllers\\" . $this->_currentController;
+
+        if (file_exists(CONTROLLER_FOLDER . $this->_currentController . ".php")) {
+        
+            $controllerObj = new $controller;
+            $action = $this->_currentAction;
+
+            // check if the action is callable
+            if (is_callable(array($controllerObj, $action))) {
+                return $controllerObj->$action($this->_urlParameters);
+            }
+        }
+
+        echo "404";
+        exit;
+
     }
 
     /**
@@ -111,7 +127,7 @@ class Application
     }
 
     /**
-     * Run when Application
+     * Run when Application is closing
      */
     public function __destruct()
     {
