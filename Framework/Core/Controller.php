@@ -71,10 +71,39 @@ class Controller
         );
         die("");
     }
-    
 
-    // load a view
-    // load a library
+    /**
+     * Loads library classes
+     * 
+     * @param Array $classes - Accepts array of library class names to implement.
+     * 
+     * @return Array assoc array of library objects
+     */
+    public function libraries(Array $classes) 
+    {
+        $libs = [];
+
+        foreach ($classes as $class) {
+            $className = ucfirst(strtolower($classes));
+
+            if (\file_exists(LIBS_FOLDER . $className . '.php')) {
+                $classWithNamespace = '\Framework\Libs\\' . $className;
+                $libs[$class] = new $classWithNamespace;
+            } else {
+                // if file not found in the library folder log the error
+                \error_log($class . "- Library file missing");
+            }
+        }
+
+    }
+
     // load a helper
 
 }
+
+// requre array of helpers and libs
+
+// $libs = ["lib1", "lib2"]; classes
+// $helpers = ["sdf","sdf"]; functions
+
+// sdf();
