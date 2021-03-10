@@ -81,7 +81,7 @@ class Controller
      * 
      * @param Array $classes - Accepts array of library class names to implement.
      * 
-     * @return Array assoc array of library objects
+     * @return Array assoc array of library objects [$class_name => new Object]
      */
     public function libraries(Array $classes) 
     {
@@ -89,7 +89,7 @@ class Controller
 
         foreach ($classes as $class) {
 
-            $className = ucfirst(strtolower($classes));
+            $className = ucfirst(strtolower($class));
 
             if (\file_exists(LIBS_FOLDER . $className. ".php")) {
 
@@ -106,6 +106,33 @@ class Controller
 
         return $libs;
 
+    }
+
+    /**
+     * Loads helper functions
+     * 
+     * @param Array $helpers - Accepts array of helper file names.
+     * 
+     * @return Array assoc array of helper functions
+     */
+    public function helpers(Array $helpers) 
+    {
+        $funcs = [];
+
+        foreach ($helpers as $func) {
+
+            $file = strtolower($func);
+
+            if (\file_exists(HELPERS_FOLDER . $file. '.php')) {
+                
+                $funcs[$func] = include HELPER_FOLDER . $file . ".php"; 
+            } else {
+                // if function not found in the functions folder log the error
+                \error_log($class . ' Library file missing');
+            }
+        }
+
+        return $funcs;
     }
 
     
