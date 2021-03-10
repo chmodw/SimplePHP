@@ -96,18 +96,18 @@ class Application
     {   
         $controller = "\App\Controllers\\" . $this->_currentController;
 
-        if (file_exists(CONTROLLER_FOLDER . $this->_currentController . ".php")) {
+        if (\class_exists($controller)) {
         
             $controllerObj = new $controller;
             $action = $this->_currentAction;
 
             // check if the action is callable
-            if (is_callable(array($controllerObj, $action))) {
+            if (\is_callable(array($controllerObj, $action))) {
                 return $controllerObj->$action($this->_urlParameters);
             }
         }
         // Send 404 error
-        header(
+        \header(
             $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404
         );
 
