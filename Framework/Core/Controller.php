@@ -33,9 +33,9 @@ class Controller
      */
     public function model(String $model) 
     {
-        if (\file_exists(MODEL_FOLDER . $model. ".php")) {
-            
-            $model = "\App\Models\\" . $model;
+        $model = "\App\Models\\" . $model;
+
+        if (\class_exists($model)) {    
             return new $model;
         }
 
@@ -57,9 +57,9 @@ class Controller
      */
     public function view(String $view) 
     {
-        if (\file_exists(VIEW_FOLDER . $view. ".php")) {
-            
-            $view = "\App\Views\\" . $view;
+        $view = "\App\Views\\" . $view;
+
+        if (\class_exists($view)) {          
             return new $view;
         }
 
@@ -84,10 +84,12 @@ class Controller
         $libs = [];
 
         foreach ($classes as $class) {
+            
             $className = ucfirst(strtolower($classes));
 
-            if (\file_exists(LIBS_FOLDER . $className . '.php')) {
-                $classWithNamespace = '\Framework\Libs\\' . $className;
+            $classWithNamespace = '\Framework\Libs\\' . $className;
+            
+            if (\class_exists($classWithNamespace)) {
                 $libs[$class] = new $classWithNamespace;
             } else {
                 // if file not found in the library folder log the error
