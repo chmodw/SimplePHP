@@ -84,7 +84,7 @@ class Controller
         $libs = [];
 
         foreach ($classes as $class) {
-            
+
             $className = ucfirst(strtolower($classes));
 
             $classWithNamespace = '\Framework\Libs\\' . $className;
@@ -97,10 +97,11 @@ class Controller
             }
         }
 
+        return $libs;
+
     }
 
-    // load a helper
-
+    
 }
 
 // requre array of helpers and libs
