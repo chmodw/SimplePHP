@@ -33,12 +33,14 @@ class Controller
      */
     public function model(String $model) 
     {
-        $model = "\App\Models\\" . $model;
+        if (\file_exists(MODEL_FOLDER . $model. ".php")) {
 
-        if (\class_exists($model)) {    
-            return new $model;
+            $model = "\App\Models\\" . $model;
+            
+            if (\class_exists($model)) {          
+                return new $model;
+            }
         }
-
         // Log the error
         \error_log($model . " - model Not Found");
         // send error to the user
@@ -57,12 +59,14 @@ class Controller
      */
     public function view(String $view) 
     {
-        $view = "\App\Views\\" . $view;
+        if (\file_exists(VIEW_FOLDER . $view. ".php")) {
 
-        if (\class_exists($view)) {          
-            return new $view;
+            $view = "\App\Views\\" . $view;
+            
+            if (\class_exists($view)) {          
+                return new $view;
+            }
         }
-
         // Log the error
         \error_log($view . " - view Not Found");
         // send error to the user
@@ -87,13 +91,16 @@ class Controller
 
             $className = ucfirst(strtolower($classes));
 
-            $classWithNamespace = '\Framework\Libs\\' . $className;
+            if (\file_exists(LIBS_FOLDER . $className. ".php")) {
+
+                $classWithNamespace = '\Framework\Libs\\' . $className;
             
-            if (\class_exists($classWithNamespace)) {
-                $libs[$class] = new $classWithNamespace;
-            } else {
-                // if file not found in the library folder log the error
-                \error_log($class . "- Library file missing");
+                if (\class_exists($classWithNamespace)) {
+                    $libs[$class] = new $classWithNamespace;
+                } else {
+                    // if file not found in the library folder log the error
+                    \error_log($class . "- Library file missing");
+                }
             }
         }
 
