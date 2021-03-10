@@ -110,10 +110,3 @@ class Controller
 
     
 }
-
-// requre array of helpers and libs
-
-// $libs = ["lib1", "lib2"]; classes
-// $helpers = ["sdf","sdf"]; functions
-
-// sdf();
