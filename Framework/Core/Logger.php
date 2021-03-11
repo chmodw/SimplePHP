@@ -26,5 +26,4 @@ namespace Framework\Logger;
 Class Logger{
 
 
-
 }
