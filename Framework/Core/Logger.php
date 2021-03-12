@@ -38,7 +38,7 @@ Class Logger
     public static function log($message = "", $type = 0)
     {
         error_log(
-            '['.date("F j, Y, g:i:s a e O").']' .
+            '['.date("Y, j, m H:i:s O").']' .
                 (self::$_messageTypes[$type] ?? "[Invalid Type]") . " " . $message . 
                 "\n", 
             3, 
