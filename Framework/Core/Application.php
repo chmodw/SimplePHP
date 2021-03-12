@@ -38,6 +38,7 @@ class Application
         // Defining folder paths
         define('DS', DIRECTORY_SEPARATOR);
         define('ROOT', getcwd(). DS); // '/var/www/website_folder/'
+        define('LOGS', ROOT . "logs" .  DS);
 
         define('APP_FOLDER', ROOT . 'App' . DS);
         define('CONFIG_FOLDER', APP_FOLDER, 'Config' . DS);
@@ -108,11 +109,8 @@ class Application
                 }
             }
         }
-        // Send 404 error
-        \header(
-            $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404
-        );
 
+        \Framework\Core\Logger::httpStatus(404, "404 Not Found");
         die();
     }
 
