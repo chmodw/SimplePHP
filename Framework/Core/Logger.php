@@ -22,10 +22,8 @@ namespace Framework\Core;
  * @license  http://www.gnu.org/copyleft/gpl.html GNU Gene
  * @link     https://github.com/chamodyawimansha/SimplePHP
  */
-
 Class Logger
 {   
-    
     private static $_logFilePath = LOGS . "log_file.log"; 
     private static $_messageTypes =  array('[Info]', '[Warning]', '[Success]');
 
@@ -69,7 +67,7 @@ Class Logger
                         );
 
         if (in_array($code, $statusCode)) {
-            header(
+            return header(
                 $_SERVER['SERVER_PROTOCOL'] . " " . $message, true, (int) $code
             );
         }
