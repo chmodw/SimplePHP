@@ -48,7 +48,8 @@ class Application
         define('CONTROLLER_FOLDER', APP_FOLDER . 'Controllers' . DS);
         define('MODEL_FOLDER', APP_FOLDER . 'Models' . DS);
         define('VIEW_FOLDER', APP_FOLDER . 'Views' . DS);
-
+        define('TEMPLATE_FOLDER', APP_FOLDER . 'Templates' . DS);
+        
         define('CORE_FOLDER', FRAMEWORK_FOLDER . 'Core' . DS);
         define('DATABASE_FOLDER', FRAMEWORK_FOLDER . 'Database' . DS);
         define('LIBS_FOLDER', FRAMEWORK_FOLDER . 'Libraries' . DS);
