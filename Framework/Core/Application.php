@@ -68,7 +68,7 @@ class Application
     /**
      * Initialize the routes
      * 
-     * @return Null
+     * @return void
      */
     private function _router()
     {   
@@ -92,7 +92,7 @@ class Application
     /**
      * Require the  Controller
      * 
-     * @return Null
+     * @return void
      */
     public function init()
     {   
@@ -118,7 +118,7 @@ class Application
     /**
      * Autoload classes
      * 
-     * @return Null
+     * @return void
      */
     private function _autoload()
     {
@@ -130,7 +130,19 @@ class Application
     }
 
     /**
+     * Loading the config file
+     * 
+     * @return void
+     */
+    private function _loadConfigs()
+    {
+
+    }
+
+    /**
      * Run when Application is closing
+     * 
+     * @return void
      */
     public function __destruct()
     {
