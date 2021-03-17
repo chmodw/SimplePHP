@@ -1,5 +1,5 @@
 composer.phar
 /vendor/
 TODO.txt
-logs/*
+/logs/*
 /App/Config.php
