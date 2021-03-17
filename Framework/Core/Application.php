@@ -36,31 +36,17 @@ class Application
     public function __construct() 
     {
         // Defining folder paths
-        define('DS', DIRECTORY_SEPARATOR);
-        define('ROOT', getcwd(). DS); // '/var/www/website_folder/'
-        define('LOGS', ROOT . "logs" .  DS);
+        $this->_definePaths();
 
-        define('APP_FOLDER', ROOT . 'App' . DS);
-        define('CONFIG_FOLDER', APP_FOLDER, 'Config' . DS);
-        define('FRAMEWORK_FOLDER', ROOT . 'Framework' . DS);
-        define('PUBLIC_FOLDER', APP_FOLDER . 'public' . DS);
-
-        define('CONTROLLER_FOLDER', APP_FOLDER . 'Controllers' . DS);
-        define('MODEL_FOLDER', APP_FOLDER . 'Models' . DS);
-        define('VIEW_FOLDER', APP_FOLDER . 'Views' . DS);
-        define('TEMPLATE_FOLDER', APP_FOLDER . 'Templates' . DS);
+        // Load config file
+        $this->_loadConfigs();
         
-        define('CORE_FOLDER', FRAMEWORK_FOLDER . 'Core' . DS);
-        define('DATABASE_FOLDER', FRAMEWORK_FOLDER . 'Database' . DS);
-        define('LIBS_FOLDER', FRAMEWORK_FOLDER . 'Libraries' . DS);
-        define('HELPERS_FOLDER', FRAMEWORK_FOLDER . 'Helpers' . DS);
-
         // Autoload classes
         $this->_autoload();
 
+        // initiate the routes
         $this->_router();
         
-
         // Stating session.
         session_start();
     }
@@ -116,6 +102,33 @@ class Application
     }
 
     /**
+     * Defining folder paths
+     * 
+     * @return void
+     */
+    private function _definePaths()
+    {
+        define('DS', DIRECTORY_SEPARATOR);
+        define('ROOT', getcwd(). DS); // '/var/www/website_folder/'
+        define('LOGS', ROOT . "logs" .  DS);
+
+        define('APP_FOLDER', ROOT . 'App' . DS);
+        define('CONFIG_FOLDER', APP_FOLDER . 'Config' . DS);
+        define('FRAMEWORK_FOLDER', ROOT . 'Framework' . DS);
+        define('PUBLIC_FOLDER', APP_FOLDER . 'public' . DS);
+
+        define('CONTROLLER_FOLDER', APP_FOLDER . 'Controllers' . DS);
+        define('MODEL_FOLDER', APP_FOLDER . 'Models' . DS);
+        define('VIEW_FOLDER', APP_FOLDER . 'Views' . DS);
+        define('TEMPLATE_FOLDER', APP_FOLDER . 'Templates' . DS);
+        
+        define('CORE_FOLDER', FRAMEWORK_FOLDER . 'Core' . DS);
+        define('DATABASE_FOLDER', FRAMEWORK_FOLDER . 'Database' . DS);
+        define('LIBS_FOLDER', FRAMEWORK_FOLDER . 'Libraries' . DS);
+        define('HELPERS_FOLDER', FRAMEWORK_FOLDER . 'Helpers' . DS);
+    }
+
+    /**
      * Autoload classes
      * 
      * @return void
@@ -136,7 +149,9 @@ class Application
      */
     private function _loadConfigs()
     {
-
+        if (\file_exists(CONFIG_FOLDER . "config.php")) {
+            $GLOBALS["configs"] = include CONFIG_FOLDER . "config.php";
+        }
     }
 
     /**

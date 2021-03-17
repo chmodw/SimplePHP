@@ -33,6 +33,6 @@ class Index extends Controller
      */
     public function index()
     {
-        echo "Hello! world";
+        var_dump($GLOBALS["configs"]);
     }
 }
