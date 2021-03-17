@@ -59,9 +59,9 @@ class Controller
      */
     public function view(String $view) 
     {
-        if (\file_exists(VIEW_FOLDER . $view. ".php")) {
+        if (\file_exists(VIEW_FOLDER . $view. ".view.php")) {
          
-            return include "\App\Views\\" . $view;
+            return include VIEW_FOLDER . $view . ".view.php";
             
         }
         // Log the error
