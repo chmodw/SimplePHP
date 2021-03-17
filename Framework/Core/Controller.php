@@ -60,12 +60,9 @@ class Controller
     public function view(String $view) 
     {
         if (\file_exists(VIEW_FOLDER . $view. ".php")) {
-
-            $view = "\App\Views\\" . $view;
+         
+            return include "\App\Views\\" . $view;
             
-            if (\class_exists($view)) {          
-                return new $view;
-            }
         }
         // Log the error
         \error_log($view . " - view Not Found");
