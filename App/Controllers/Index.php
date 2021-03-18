@@ -35,12 +35,7 @@ class Index extends Controller
      */
     public function __construct()
     {
-        // Loading Helper functions
-        $this->_helpers = parent::helpers(
-            [
-                "demo",
-            ]
-        );    
+        $this->_helpers = parent::helpers(["demo"]);    
     }
 
     /**
@@ -50,6 +45,10 @@ class Index extends Controller
      */
     public function index()
     {
-        echo $this->_helpers["demo"]("Hello! World");
+        $data = [
+            "demo" => $this->_helpers["demo"]("Hello! World."),
+        ];
+
+        parent::view("index", $data);
     }
 }
