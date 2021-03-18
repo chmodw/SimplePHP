@@ -54,12 +54,15 @@ class Controller
      * View a Model class
      * 
      * @param String $view - name of the View Class
+     * @param Array  $data - data to show in the view file
      * 
      * @return View
      */
-    public function view(String $view) 
+    public function view(String $view, $data = []) 
     {
         if (\file_exists(VIEW_FOLDER . $view. ".view.php")) {
+
+            $viewData = $data;
          
             return include VIEW_FOLDER . $view . ".view.php";
             
