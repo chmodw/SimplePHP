@@ -19,6 +19,6 @@
     <title>Index</title>
 </head>
 <body>
-    <h1><?php $viewData["demo"]; ?></h1>
+    <h1><?php echo $viewData["demo"]; ?></h1>
 </body>
 </html>
