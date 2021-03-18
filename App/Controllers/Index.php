@@ -26,6 +26,23 @@ use \Framework\Core\Controller as Controller;
  */
 class Index extends Controller
 {
+    private $_helpers;
+
+    /**
+     * Loads when object called
+     * 
+     * @return void 
+     */
+    public function __construct()
+    {
+        // Loading Helper functions
+        $this->_helpers = parent::helpers(
+            [
+                "demo",
+            ]
+        );    
+    }
+
     /**
      * Index function
      * 
@@ -33,6 +50,6 @@ class Index extends Controller
      */
     public function index()
     {
-        parent::view("index");
+        echo $this->_helpers["demo"]("Hello! World");
     }
 }

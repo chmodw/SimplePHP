@@ -11,5 +11,5 @@
  */
 
 return function ($text) {
-    return "Hello, this is demo helper function";
+    return $text;
 };
