@@ -111,6 +111,7 @@ class Application
         define('DS', DIRECTORY_SEPARATOR);
         define('ROOT', getcwd(). DS); // '/var/www/website_folder/'
         define('LOGS', ROOT . "logs" .  DS);
+        define('PUBLIC_FOLDER', ROOT . "public" . ds);
 
         define('APP_FOLDER', ROOT . 'App' . DS);
         define('CONFIG_FOLDER', APP_FOLDER . 'Config' . DS);
@@ -126,6 +127,12 @@ class Application
         define('DATABASE_FOLDER', FRAMEWORK_FOLDER . 'Database' . DS);
         define('LIBS_FOLDER', FRAMEWORK_FOLDER . 'Libraries' . DS);
         define('HELPERS_FOLDER', FRAMEWORK_FOLDER . 'Helpers' . DS);
+
+        define("STYLES_FOLDER", PUBLIC_FOLDER . "styles" . DS);
+        define("SCRIPTS_FOLDER", PUBLIC_FOLDER . "scripts" . DS);
+        define("IMAGES_FOLDER", PUBLIC_FOLDER . "images" . DS);
+        define("UPLOADS_FOLDER", PUBLIC_FOLDER . "uploads" . DS);
+
     }
 
     /**
