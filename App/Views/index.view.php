@@ -1,3 +1,15 @@
+<?php
+/**
+ * Index View File
+ * php version 7.4.2
+ *
+ * @category View_File
+ * @package  SimplePHP
+ * @author   Chamodya Wimansha <chamodyawimansha@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU Gene
+ * @link     https://github.com/chamodyawimansha/SimplePHP
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +19,6 @@
     <title>Index</title>
 </head>
 <body>
-    <h1>Hello! World.</h1>
+    <h1><?php $viewData["demo"]; ?></h1>
 </body>
 </html>
