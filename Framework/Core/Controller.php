@@ -122,7 +122,7 @@ class Controller
 
             if (\file_exists(HELPERS_FOLDER . $file. '.php')) {
                 
-                $funcs[$func] = include HELPER_FOLDER . $file . ".php"; 
+                $funcs[$func] = include HELPERS_FOLDER . $file . ".php"; 
             } else {
                 // if function not found in the functions folder log the error
                 \error_log($class . ' Library file missing');
