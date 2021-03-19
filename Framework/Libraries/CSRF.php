@@ -51,28 +51,41 @@ class CSRF
      */
     public static function get($ti)
     {
+        if (isset($_SESSION["csrf_tokens"][$ti])) {
+            return $_SESSION["csrf_tokens"][$ti];
+        }
 
+        return "Invalid Token Identifier";
     }
 
     /**
      * Check the Authenticity of a token
      * 
-     * @param $ti - Token Identifier - A key to identify the token
+     * @param $ti    - Token Identifier - A key to identify the token
+     * @param $token - CSRF Token
      * 
      * @return bool
      */
-    public static function check($ti)
+    public static function check($ti, $token)
     {
+        if (isset($_SESSION["csrf_tokens"][$ti])) {
+            if ($_SESSION["csrf_tokens"][$ti] === $token) {
+                return true;
+            }
+        }
 
+        return false;
     }
 
     /**
-     * Unset the Token array from session 
+     * Destroys the Token array from session 
      * 
      * @return void
      */
     public static function unset()
     {
-
+        if (isset($_SESSION["csrf_tokens"])) {
+            unset($_SESSION["csrf_tokens"]);
+        }
     }
 }
