@@ -167,7 +167,7 @@ class Application
      */
     public function __destruct()
     {
-        session_destroy();
+        session_write_close();
     }
 
 }
