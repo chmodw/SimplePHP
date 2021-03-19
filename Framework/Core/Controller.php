@@ -26,18 +26,17 @@ class Controller
 {
     /**
      * Returns a Model class
-     * 
+     *
      * @param String $model - name of the Model class
-     * 
+     *
      * @return Model
      */
-    public function model(String $model) 
+    public function model(String $model)
     {
         if (\file_exists(MODEL_FOLDER . $model. ".php")) {
-
             $model = "\App\Models\\" . $model;
             
-            if (\class_exists($model)) {          
+            if (\class_exists($model)) {
                 return new $model;
             }
         }
@@ -45,87 +44,55 @@ class Controller
         \error_log($model . " - model Not Found");
         // send error to the user
         \header(
-            $_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500
+            $_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error',
+            true,
+            500
         );
         die("");
     }
 
     /**
      * View a Model class
-     * 
+     *
      * @param String $view - name of the View Class
      * @param Array  $data - data to show in the view file
-     * 
+     *
      * @return View
      */
-    public function view(String $view, $data = []) 
+    public function view(String $view, $data = [])
     {
         if (\file_exists(VIEW_FOLDER . $view. ".view.php")) {
-
             $viewData = $data;
          
             return include VIEW_FOLDER . $view . ".view.php";
-            
         }
         // Log the error
         \error_log($view . " - view Not Found");
         // send error to the user
         \header(
-            $_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500
+            $_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error',
+            true,
+            500
         );
         die("");
     }
 
     /**
-     * Loads library classes
-     * 
-     * @param Array $classes - Accepts array of library class names to implement.
-     * 
-     * @return Array assoc array of library objects [$class_name => new Object]
-     */
-    public function libraries(Array $classes) 
-    {
-        $libs = [];
-
-        foreach ($classes as $class) {
-
-            $className = ucfirst(strtolower($class));
-
-            if (\file_exists(LIBS_FOLDER . $className. ".php")) {
-
-                $classWithNamespace = '\Framework\Libs\\' . $className;
-            
-                if (\class_exists($classWithNamespace)) {
-                    $libs[$class] = new $classWithNamespace;
-                } else {
-                    // if file not found in the library folder log the error
-                    \error_log($class . "- Library file missing");
-                }
-            }
-        }
-
-        return $libs;
-
-    }
-
-    /**
      * Loads helper functions
-     * 
+     *
      * @param Array $helpers - Accepts array of helper file names.
-     * 
+     *
      * @return Array assoc array of helper functions
      */
-    public function helpers(Array $helpers) 
+    public function helpers(array $helpers)
     {
         $funcs = [];
 
         foreach ($helpers as $func) {
-
             $file = strtolower($func);
 
             if (\file_exists(HELPERS_FOLDER . $file. '.php')) {
-                
-                $funcs[$func] = include HELPERS_FOLDER . $file . ".php"; 
+                $funcs[$func] = include HELPERS_FOLDER . $file . ".php";
             } else {
                 // if function not found in the functions folder log the error
                 \error_log($class . ' Library file missing');
@@ -134,6 +101,4 @@ class Controller
 
         return $funcs;
     }
-
-    
 }
