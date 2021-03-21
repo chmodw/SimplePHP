@@ -41,9 +41,6 @@ class Application
         // Load config file
         $this->_loadConfigs();
         
-        // Autoload classes
-        $this->_autoload();
-
         // initiate the routes
         $this->_router();
         
@@ -132,20 +129,6 @@ class Application
         define("IMAGES_FOLDER", PUBLIC_FOLDER . "images" . DS);
         define("UPLOADS_FOLDER", PUBLIC_FOLDER . "uploads" . DS);
 
-    }
-
-    /**
-     * Autoload classes
-     * 
-     * @return void
-     */
-    private function _autoload()
-    {
-        spl_autoload_register(
-            function ($className) {
-                include str_replace('\\', '/', $className) . '.php';
-            }
-        );
     }
 
     /**

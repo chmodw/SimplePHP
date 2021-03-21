@@ -10,9 +10,9 @@
  * @link     https://github.com/chamodyawimansha/SimplePHP
  */
 
-require "Framework/Core/Application.php";
+require __DIR__ . '/vendor/autoload.php';
 
- $app = new Framework\Core\Application();
+$app = new Framework\Core\Application();
 
  $app->init();
  
