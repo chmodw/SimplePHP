@@ -24,6 +24,7 @@ namespace Framework\Core;
  */
 class Controller
 {
+
     /**
      * Returns a Model class
      *
@@ -31,7 +32,7 @@ class Controller
      *
      * @return Model
      */
-    public function model(String $model)
+    protected function model(String $model)
     {
         if (\file_exists(MODEL_FOLDER . $model. ".php")) {
             $model = "\App\Models\\" . $model;
@@ -59,7 +60,7 @@ class Controller
      *
      * @return View
      */
-    public function view(String $view, $data = [])
+    protected function view(String $view, $data = [])
     {
         if (\file_exists(VIEW_FOLDER . $view. ".view.php")) {
             $viewData = $data;
@@ -84,7 +85,7 @@ class Controller
      *
      * @return Array assoc array of helper functions
      */
-    public function helpers(array $helpers)
+    protected function helpers(array $helpers)
     {
         $funcs = [];
 
@@ -100,5 +101,29 @@ class Controller
         }
 
         return $funcs;
+    }
+
+    /**
+     * Redirect to controllers with data
+     * 
+     * @param $route    - controller/method
+     * @param $passings - data to send 
+     * 
+     * @return Controller
+     */
+    protected function redirect($route = "index/index", $passings = [])
+    {   
+        $controller = explode('/', $route)[0];
+
+        if (!isset($_SESSION[$controller])) {
+            $_SESSION[$controller] = [];
+        }
+
+        \array_push(
+            $_SESSION[$controller], 
+            [$passings[0] => $passings[1]]
+        );
+
+        header("Location:/".$route);
     }
 }
